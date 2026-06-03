@@ -14,9 +14,10 @@ describe('ProjectsPage', () => {
     render(<ProjectsPage />)
     expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent('Projects')
   })
-  it('renders all 7 projects', () => {
+  it('renders all 8 projects', () => {
     render(<ProjectsPage />)
-    expect(screen.getByText('@cy/ui Component Library')).toBeInTheDocument()
+    expect(screen.getByText('@crawfordyoung/ui Component Library')).toBeInTheDocument()
+    expect(screen.getByText('Cybond')).toBeInTheDocument()
     expect(screen.getByText('HTML Idle Game')).toBeInTheDocument()
   })
 })

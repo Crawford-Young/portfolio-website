@@ -4,7 +4,7 @@ import { workExperience, education } from '@/data/experience'
 import { hobbies } from '@/data/hobbies'
 
 describe('projects', () => {
-  it('has 7 projects', () => expect(projects).toHaveLength(7))
+  it('has 8 projects', () => expect(projects).toHaveLength(8))
   it('each project has slug, title, description, tech[]', () => {
     for (const p of projects) {
       expect(p.slug).toBeTruthy()

@@ -3,20 +3,29 @@ import type { Project } from '@/types'
 export const projects: Project[] = [
   {
     slug: 'component-library',
-    title: '@cy/ui Component Library',
+    title: '@crawfordyoung/ui Component Library',
     description:
       'Production-quality React component library built on Radix UI primitives, styled with Tailwind CSS and CVA. Wave 1 ships 10 fully-tested, accessible components.',
     tech: ['React', 'TypeScript', 'Radix UI', 'Storybook', 'CVA'],
+    url: 'https://ui.crawfordyoung.dev',
     repo: 'https://github.com/Crawford-Young/cy-ui',
   },
   {
     slug: 'portfolio-website',
     title: 'Portfolio Website',
     description:
-      'Personal website built with Next.js 15, @cy/ui, and framer-motion effects. Deployed to GitHub Pages via static export.',
+      'Personal website built with Next.js 15, @crawfordyoung/ui, and Framer Motion effects. Deployed on Vercel.',
     tech: ['Next.js', 'TypeScript', 'Tailwind CSS'],
-    url: 'https://crawford-young.github.io',
+    url: 'https://crawfordyoung.dev',
     repo: 'https://github.com/Crawford-Young/Crawford-Young.github.io',
+  },
+  {
+    slug: 'cybond',
+    title: 'Cybond',
+    description:
+      'AI-powered scheduling advisor that integrates with Google Calendar, analyzes your schedule, and surfaces recommendations to help you plan your week more intentionally.',
+    tech: ['Next.js', 'TypeScript', 'AI SDK', 'Neon', 'Drizzle', 'Auth.js', 'Stripe'],
+    url: 'https://cybond.crawfordyoung.dev',
   },
   {
     slug: 'web-dev-club',

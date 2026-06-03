@@ -9,6 +9,7 @@ export const projects: Project[] = [
     tech: ['React', 'TypeScript', 'Radix UI', 'Storybook', 'CVA'],
     url: 'https://ui.crawfordyoung.dev',
     repo: 'https://github.com/Crawford-Young/cy-ui',
+    npm: 'https://www.npmjs.com/package/@crawfordyoung/ui',
   },
   {
     slug: 'portfolio-website',

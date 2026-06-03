@@ -5,6 +5,7 @@ export type Project = {
   tech: string[]
   url?: string
   repo?: string
+  npm?: string
 }
 
 export type WorkExperience = {

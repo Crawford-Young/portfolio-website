@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { Card, CardContent, Badge } from '@crawfordyoung/ui'
 import { GlowCard } from '@/components/effects/glow-card'
-import { ArrowUpRight, Github, ExternalLink } from 'lucide-react'
+import { ArrowUpRight, Github, ExternalLink, Package } from 'lucide-react'
 import type { Project } from '@/types'
 
 export function ProjectCard({ project }: { project: Project }) {
@@ -50,6 +50,16 @@ export function ProjectCard({ project }: { project: Project }) {
                 className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
               >
                 <ExternalLink className="h-3 w-3" /> Live
+              </a>
+            )}
+            {project.npm && (
+              <a
+                href={project.npm}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+              >
+                <Package className="h-3 w-3" /> npm
               </a>
             )}
           </div>

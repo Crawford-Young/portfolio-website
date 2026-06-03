@@ -16,4 +16,7 @@ lint:
 format:
     pnpm prettier --write .
 
-check: lint typecheck test build
+e2e:
+    pnpm playwright test
+
+check: lint typecheck test build e2e

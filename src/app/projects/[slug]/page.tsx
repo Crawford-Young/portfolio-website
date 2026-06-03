@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Badge, Button } from '@crawfordyoung/ui'
-import { ArrowLeft, Github, ExternalLink } from 'lucide-react'
+import { ArrowLeft, Github, ExternalLink, Package } from 'lucide-react'
 import { projects } from '@/data/projects'
 
 type Params = { params: Promise<{ slug: string }> }
@@ -52,6 +52,13 @@ export default async function ProjectDetailPage({ params }: Params) {
           <Button asChild variant="default" size="sm">
             <a href={project.url} target="_blank" rel="noreferrer">
               <ExternalLink className="h-4 w-4 mr-2" /> Live site
+            </a>
+          </Button>
+        )}
+        {project.npm && (
+          <Button asChild variant="outline" size="sm">
+            <a href={project.npm} target="_blank" rel="noreferrer">
+              <Package className="h-4 w-4 mr-2" /> npm
             </a>
           </Button>
         )}

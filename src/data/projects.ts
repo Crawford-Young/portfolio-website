@@ -49,6 +49,7 @@ export const projects: Project[] = [
     description:
       'Real-time instrument tuner that detects pitch from microphone input and displays accurate tuning feedback.',
     tech: ['Python', 'Audio Processing'],
+    url: 'https://music.crawfordyoung.dev',
     repo: 'https://github.com/Crawford-Young/InstrumentTuner',
   },
   {

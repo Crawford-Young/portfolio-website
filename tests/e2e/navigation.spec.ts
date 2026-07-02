@@ -44,6 +44,15 @@ test('cybond card shows live link', async ({ page }) => {
   )
 })
 
+test('instrument tuner card shows live link', async ({ page }) => {
+  await page.goto('/projects')
+  const card = page.locator('text=Instrument Tuner').locator('../..')
+  await expect(card.getByRole('link', { name: /live/i })).toHaveAttribute(
+    'href',
+    'https://music.crawfordyoung.dev'
+  )
+})
+
 test('nav links navigate correctly', async ({ page }) => {
   await page.goto('/')
   await page.getByRole('link', { name: /projects/i }).click()

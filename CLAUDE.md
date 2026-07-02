@@ -60,6 +60,12 @@ All other workspace DoD items remain required.
 - No manual deploy steps needed
 - Environment variables managed in Vercel dashboard (see `~/code/docs/Crawford-Young.github.io/` for context)
 
+## CI / Testing
+
+- Required CI workflow name for E2E: **"E2E Accessibility"** — this name is enforced as a branch protection rule; renaming it breaks the required check
+- Playwright `webServer` uses `pnpm dev` (not `pnpm build && pnpm start`)
+- After every push to a PR, run `gh pr checks <number> --watch` and wait for green before moving on
+
 ---
 
 ## Planning Docs

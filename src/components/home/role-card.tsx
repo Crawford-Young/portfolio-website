@@ -1,4 +1,4 @@
-import { Card, CardContent, Badge } from '@crawfordyoung/ui'
+import { Card, CardContent, Badge } from '@/lib/ui'
 import { GlowCard } from '@/components/effects/glow-card'
 import { Building2 } from 'lucide-react'
 

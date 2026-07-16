@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Card, CardContent } from '@crawfordyoung/ui'
+import { Card, CardContent } from '@/lib/ui'
 import { GlowCard } from '@/components/effects/glow-card'
 import { ArrowRight } from 'lucide-react'
 

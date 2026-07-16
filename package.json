@@ -21,7 +21,7 @@
     ]
   },
   "dependencies": {
-    "@crawfordyoung/ui": "^0.1.0",
+    "@crawfordyoung/ui": "^0.22.0",
     "@sentry/nextjs": "^10.49.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",

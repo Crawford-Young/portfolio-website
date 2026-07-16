@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { Badge, Button } from '@crawfordyoung/ui'
+import { Badge, Button } from '@/lib/ui'
 import { ArrowLeft, Github, ExternalLink, Package } from 'lucide-react'
 import { projects } from '@/data/projects'
 

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Separator } from '@crawfordyoung/ui'
+import { Separator } from '@/lib/ui'
 import { WorkTimelineItem } from '@/components/experience/timeline-item'
 import { EducationTimelineItem } from '@/components/experience/timeline-item'
 import { workExperience, education } from '@/data/experience'

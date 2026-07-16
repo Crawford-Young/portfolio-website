@@ -1,4 +1,4 @@
-import { Card, CardContent } from '@crawfordyoung/ui'
+import { Card, CardContent } from '@/lib/ui'
 import { GlowCard } from '@/components/effects/glow-card'
 
 export function AboutCard() {

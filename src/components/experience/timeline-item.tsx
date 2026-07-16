@@ -1,4 +1,4 @@
-import { Badge } from '@crawfordyoung/ui'
+import { Badge } from '@/lib/ui'
 import { CountUp } from '@/components/effects/count-up'
 import { cn } from '@/lib/utils'
 import type { WorkExperience, Education } from '@/types'

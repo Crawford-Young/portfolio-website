@@ -1,11 +1,10 @@
 'use client'
 
-import '@/app/globals.css'
 import * as Sentry from '@sentry/nextjs'
 import { RouteErrorFallback } from '@/lib/ui'
 import { useEffect } from 'react'
 
-export default function GlobalError({
+export default function RootError({
   error,
   reset,
 }: {
@@ -16,11 +15,5 @@ export default function GlobalError({
     Sentry.captureException(error)
   }, [error])
 
-  return (
-    <html lang="en" className="dark">
-      <body className="flex min-h-screen items-center justify-center">
-        <RouteErrorFallback error={error} reset={reset} homeHref="/" />
-      </body>
-    </html>
-  )
+  return <RouteErrorFallback error={error} reset={reset} homeHref="/" />
 }

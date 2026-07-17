@@ -20,8 +20,8 @@ importers:
   .:
     dependencies:
       '@crawfordyoung/ui':
-        specifier: ^0.22.0
-        version: 0.22.0(@tanstack/react-table@8.21.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(cmdk@1.1.1(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(date-fns@4.4.0)(framer-motion@12.38.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(lucide-react@0.511.0(react@19.1.0))(react-day-picker@10.0.1(@types/react@19.2.14)(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react-is@17.0.2)(react@19.1.0)(redux@5.0.1)(sonner@2.0.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(tailwindcss-animate@1.0.7(tailwindcss@4.2.2))(tailwindcss@4.2.2)
+        specifier: ^0.24.0
+        version: 0.24.0(@tanstack/react-table@8.21.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(cmdk@1.1.1(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(date-fns@4.4.0)(framer-motion@12.38.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(lucide-react@0.511.0(react@19.1.0))(react-day-picker@10.0.1(@types/react@19.2.14)(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react-is@17.0.2)(react@19.1.0)(redux@5.0.1)(sonner@2.0.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(tailwindcss-animate@1.0.7(tailwindcss@4.2.2))(tailwindcss@4.2.2)
       '@sentry/nextjs':
         specifier: ^10.49.0
         version: 10.56.0(@opentelemetry/core@2.8.0(@opentelemetry/api@1.9.1))(@opentelemetry/sdk-trace-base@2.7.1(@opentelemetry/api@1.9.1))(next@16.2.7(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@playwright/test@1.60.0)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(react@19.1.0)(webpack@5.107.2(lightningcss@1.32.0))
@@ -334,8 +334,8 @@ packages:
       conventional-commits-parser:
         optional: true
 
-  '@crawfordyoung/ui@0.22.0':
-    resolution: {integrity: sha512-oyhluUFgNjmt2UAzfxPZM3ophGCOcSnAKWKQPeJeSkeruGliY8LibTyGdzrT2YG2/rW4gNgLe5kj5CT2t4VBAw==}
+  '@crawfordyoung/ui@0.24.0':
+    resolution: {integrity: sha512-gr210fAADflbiN5vNdxwRqEzg2E/44IVlbm9z5PREOftR/XDwbWvQ1ouIzW6vKURgQV46e7bhEYaG682kMNt5Q==}
     peerDependencies:
       '@tanstack/react-table': '>=8'
       cmdk: '>=1'
@@ -4933,7 +4933,7 @@ snapshots:
     optionalDependencies:
       conventional-commits-parser: 6.4.0
 
-  '@crawfordyoung/ui@0.22.0(@tanstack/react-table@8.21.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(cmdk@1.1.1(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(date-fns@4.4.0)(framer-motion@12.38.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(lucide-react@0.511.0(react@19.1.0))(react-day-picker@10.0.1(@types/react@19.2.14)(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react-is@17.0.2)(react@19.1.0)(redux@5.0.1)(sonner@2.0.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(tailwindcss-animate@1.0.7(tailwindcss@4.2.2))(tailwindcss@4.2.2)':
+  '@crawfordyoung/ui@0.24.0(@tanstack/react-table@8.21.3(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(cmdk@1.1.1(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(date-fns@4.4.0)(framer-motion@12.38.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(lucide-react@0.511.0(react@19.1.0))(react-day-picker@10.0.1(@types/react@19.2.14)(react@19.1.0))(react-dom@19.1.0(react@19.1.0))(react-is@17.0.2)(react@19.1.0)(redux@5.0.1)(sonner@2.0.7(react-dom@19.1.0(react@19.1.0))(react@19.1.0))(tailwindcss-animate@1.0.7(tailwindcss@4.2.2))(tailwindcss@4.2.2)':
     dependencies:
       '@radix-ui/react-accordion': 1.2.16(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@radix-ui/react-alert-dialog': 1.1.19(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -4954,7 +4954,7 @@ snapshots:
       '@radix-ui/react-select': 2.3.3(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@radix-ui/react-separator': 1.1.8(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@radix-ui/react-slider': 1.4.3(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
-      '@radix-ui/react-slot': 1.2.4(@types/react@19.2.14)(react@19.1.0)
+      '@radix-ui/react-slot': 1.3.0(@types/react@19.2.14)(react@19.1.0)
       '@radix-ui/react-switch': 1.3.3(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@radix-ui/react-tabs': 1.1.17(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@radix-ui/react-toggle': 1.1.14(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -7079,10 +7079,10 @@ snapshots:
 
   cmdk@1.1.1(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.1.0(react@19.1.0))(react@19.1.0):
     dependencies:
-      '@radix-ui/react-compose-refs': 1.1.2(@types/react@19.2.14)(react@19.1.0)
+      '@radix-ui/react-compose-refs': 1.1.3(@types/react@19.2.14)(react@19.1.0)
       '@radix-ui/react-dialog': 1.1.19(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@radix-ui/react-id': 1.1.2(@types/react@19.2.14)(react@19.1.0)
-      '@radix-ui/react-primitive': 2.1.4(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+      '@radix-ui/react-primitive': 2.1.7(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
     transitivePeerDependencies:

@@ -53,6 +53,13 @@ All other workspace DoD items remain required.
 
 ---
 
+## Error Boundaries
+
+- Root (`src/app/error.tsx`) and global (`src/app/global-error.tsx`) boundaries render `RouteErrorFallback` (`@crawfordyoung/ui` ≥0.24.0) with `homeHref="/"` — placement rule: root/global boundaries get the home link (no surviving shell nav); segment boundaries would not.
+- Both capture to Sentry via `useEffect(() => Sentry.captureException(error), [error])`.
+- `src/app/**` is excluded from the vitest coverage `include` allowlist — `tests/unit/root-error.test.tsx` and `tests/unit/global-error.test.tsx` are behavioral, not coverage-feeding.
+- **Known tooling gap:** `postcss.config.mjs` uses the Next.js/Tailwind-v4 string-plugin form (`plugins: ['@tailwindcss/postcss']`), which Vite's own postcss loader (used by vitest) cannot resolve — any test that transitively imports a `.css` file fails with `Invalid PostCSS Plugin found`. `global-error.tsx` imports `@/app/globals.css` so design tokens resolve outside the app shell; its test mocks that import (`vi.mock('@/app/globals.css', () => ({}))`) to route around the gap. A real fix (postcss config format vitest can also load, or a vitest CSS alias) is unscoped housekeeping — not fixed here.
+
 ## Deployment
 
 - Deployed automatically on push to `main` via Vercel

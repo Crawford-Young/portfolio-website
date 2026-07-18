@@ -80,7 +80,7 @@ describe('HomePage', () => {
     expect(
       screen.getByRole('heading', { name: '@crawfordyoung/ui Component Library' })
     ).toBeInTheDocument()
-    expect(screen.getByRole('heading', { name: 'Instrument Tuner' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: "Cy's Music" })).toBeInTheDocument()
   })
   it('renders non-flagship projects in the More projects grid', () => {
     render(<HomePage />)

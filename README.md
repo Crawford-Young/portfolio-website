@@ -1,12 +1,12 @@
 # Crawford Young — Portfolio
 
-Marketing site for projects (Cybond, Instrument Tuner, `@crawfordyoung/ui`), with the person as backup. Built with Next.js App Router, deployed on Vercel.
+Marketing site for projects (Cybond, Cy's Music, `@crawfordyoung/ui`), with the person as backup. Built with Next.js App Router, deployed on Vercel.
 
 Live at **https://crawfordyoung.dev**.
 
 ## Site Structure
 
-- **Home** (`src/app/page.tsx`): Hero (pitch H1 "I build AI products and developer tools.", avatar eyebrow, "Try Cybond" + GitHub CTAs) → three full-width `FlagshipSection`s with alternating screenshot sides (`@crawfordyoung/ui`, Cybond, Instrument Tuner) → "More projects" grid (`ProjectCard`) → "About the builder" bento strip (About / Hobbies teaser / GitHub stats / Contact, `id="contact"` anchor).
+- **Home** (`src/app/page.tsx`): Hero (pitch H1 "I build AI products and developer tools.", avatar eyebrow, "Try Cybond" + GitHub CTAs) → three full-width `FlagshipSection`s with alternating screenshot sides (`@crawfordyoung/ui`, Cybond, Cy's Music) → "More projects" grid (`ProjectCard`) → "About the builder" bento strip (About / Hobbies teaser / GitHub stats / Contact, `id="contact"` anchor).
 - **Projects page**: flagships first (full-width, pitch copy via `ProjectCard`'s `featured` prop), then the rest in a 2-column grid.
 - **Hobbies page**: per-hobby `Accordion` (single-open, from `@crawfordyoung/ui`) replacing the old expandable cards.
 

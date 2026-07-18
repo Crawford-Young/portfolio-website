@@ -15,6 +15,27 @@ describe('projects', () => {
   })
 })
 
+describe('flagship projects', () => {
+  const flagships = projects.filter((p) => p.flagship)
+
+  it('marks exactly cybond, component-library, and instrument-tuner as flagships', () => {
+    expect(flagships.map((p) => p.slug).sort()).toEqual([
+      'component-library',
+      'cybond',
+      'instrument-tuner',
+    ])
+  })
+
+  it('every flagship has pitch, screenshot, live url, and cta label', () => {
+    for (const p of flagships) {
+      expect(p.pitch, p.slug).toBeTruthy()
+      expect(p.screenshot, p.slug).toMatch(/^\/screenshots\//)
+      expect(p.url, p.slug).toBeTruthy()
+      expect(p.ctaLabel, p.slug).toBeTruthy()
+    }
+  })
+})
+
 describe('experience', () => {
   it('first work entry is Aderant', () => expect(workExperience[0].company).toBe('Aderant'))
   it('has education entries', () => expect(education.length).toBeGreaterThan(0))

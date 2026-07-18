@@ -6,6 +6,10 @@ export type Project = {
   url?: string
   repo?: string
   npm?: string
+  flagship?: boolean
+  pitch?: string // marketing pitch shown in flagship/featured contexts
+  ctaLabel?: string // primary CTA text, e.g. 'Try it live'
+  screenshot?: string // public-dir path, e.g. '/screenshots/cybond.png'
 }
 
 export type WorkExperience = {

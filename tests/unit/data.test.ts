@@ -38,6 +38,30 @@ describe('hobbies', () => {
       expect(h.details.length).toBeGreaterThanOrEqual(1)
     }
   })
+  it('detail copy uses the approved plain-voice wording', () => {
+    const detail = (hobbyId: string, detailId: string): string | undefined =>
+      hobbies.find((h) => h.id === hobbyId)?.details.find((d) => d.id === detailId)?.detail
+    expect(detail('outdoors', 'lacrosse')).toBe('Played all four years of high school.')
+    expect(detail('outdoors', 'kayak')).toBe(
+      'Whitewater kayak and canoe instructor at Camp Rockmont in the Blue Ridge Mountains.'
+    )
+    expect(detail('instruments', 'five')).toBe('Piano, guitar, ukulele, harmonica, and trumpet.')
+    expect(detail('chess', 'elo')).toBe('Around 1400 rapid on chess.com.')
+    expect(detail('gaming', 'rl')).toBe(
+      "Grand Champion — the most mechanically demanding game I've played."
+    )
+    expect(detail('writing', 'stories')).toBe(
+      'Short fiction and poetry, whatever fits the feeling.'
+    )
+  })
+  it('has no quippy copy anywhere in hobby text', () => {
+    const all = hobbies
+      .flatMap((h) => [h.description, ...h.details.map((d) => d.detail ?? '')])
+      .join(' ')
+    expect(all).not.toMatch(
+      /hamstring|pretend to be athletic|not to flip|loudest thing|dialect|don't deserve|debugging|too specific to be made up|non-linear/i
+    )
+  })
   it('each detail card has id, icon, label, and either detail or href', () => {
     for (const h of hobbies) {
       for (const d of h.details) {

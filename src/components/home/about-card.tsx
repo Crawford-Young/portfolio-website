@@ -16,7 +16,7 @@ export function AboutCard() {
               with full-stack depth in Python/FastAPI and AWS.
             </p>
           </div>
-          <p className="text-xs text-muted-foreground/60">
+          <p className="text-xs text-muted-foreground">
             B.S. Computer Science · Auburn University · Summa Cum Laude
           </p>
         </CardContent>

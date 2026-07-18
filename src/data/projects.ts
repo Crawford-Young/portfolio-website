@@ -10,6 +10,11 @@ export const projects: Project[] = [
     url: 'https://ui.crawfordyoung.dev',
     repo: 'https://github.com/Crawford-Young/cy-ui',
     npm: 'https://www.npmjs.com/package/@crawfordyoung/ui',
+    flagship: true,
+    pitch:
+      'A production React component library built on Radix primitives — accessible, fully tested, and documented in Storybook.',
+    ctaLabel: 'Storybook',
+    screenshot: '/screenshots/ui.png',
   },
   {
     slug: 'portfolio-website',
@@ -27,6 +32,11 @@ export const projects: Project[] = [
       'AI-powered scheduling advisor that integrates with Google Calendar, analyzes your schedule, and surfaces recommendations to help you plan your week more intentionally.',
     tech: ['Next.js', 'TypeScript', 'AI SDK', 'Neon', 'Drizzle', 'Auth.js', 'Stripe'],
     url: 'https://cybond.crawfordyoung.dev',
+    flagship: true,
+    pitch:
+      'An AI scheduling advisor that connects to your Google Calendar, understands how you actually spend your time, and helps you plan your week with intention.',
+    ctaLabel: 'Try it live',
+    screenshot: '/screenshots/cybond.png',
   },
   {
     slug: 'web-dev-club',
@@ -51,6 +61,11 @@ export const projects: Project[] = [
     tech: ['Python', 'Audio Processing'],
     url: 'https://music.crawfordyoung.dev',
     repo: 'https://github.com/Crawford-Young/InstrumentTuner',
+    flagship: true,
+    pitch:
+      'A real-time instrument tuner in the browser. Microphone in, accurate pitch out — open it and play.',
+    ctaLabel: 'Open the tuner',
+    screenshot: '/screenshots/tuner.png',
   },
   {
     slug: 'ai-pacman',

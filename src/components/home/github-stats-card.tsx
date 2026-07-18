@@ -40,7 +40,7 @@ export async function GitHubStatsCard() {
             {BADGES.map((b) => (
               <span
                 key={b}
-                className="text-xs bg-surface-raised text-muted-foreground px-2 py-0.5 rounded-full border border-border"
+                className="text-xs bg-surface-raised text-zinc-600 dark:text-muted-foreground px-2 py-0.5 rounded-full border border-border"
               >
                 {b}
               </span>

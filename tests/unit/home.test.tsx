@@ -54,14 +54,10 @@ describe('HomePage', () => {
       'href',
       'https://cybond.crawfordyoung.dev'
     )
-    expect(screen.getByRole('link', { name: /github/i })).toHaveAttribute(
-      'href',
-      'https://github.com/Crawford-Young'
-    )
-  })
-  it('renders Aderant in role card', () => {
-    render(<HomePage />)
-    expect(screen.getAllByText(/Aderant/).length).toBeGreaterThan(0)
+    const githubProfileLink = screen
+      .getAllByRole('link', { name: /github/i })
+      .find((link) => link.getAttribute('href') === 'https://github.com/Crawford-Young')
+    expect(githubProfileLink).toBeInTheDocument()
   })
   it('has contact email link', () => {
     render(<HomePage />)
@@ -77,5 +73,22 @@ describe('HomePage', () => {
   it('renders profile image', () => {
     render(<HomePage />)
     expect(screen.getByAltText('Crawford Young')).toBeInTheDocument()
+  })
+  it('renders all three flagship sections', () => {
+    render(<HomePage />)
+    expect(screen.getByRole('heading', { name: 'Cybond' })).toBeInTheDocument()
+    expect(
+      screen.getByRole('heading', { name: '@crawfordyoung/ui Component Library' })
+    ).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Instrument Tuner' })).toBeInTheDocument()
+  })
+  it('renders non-flagship projects in the More projects grid', () => {
+    render(<HomePage />)
+    expect(screen.getByRole('heading', { name: /more projects/i })).toBeInTheDocument()
+    expect(screen.getByText('Chess Puzzle Generator')).toBeInTheDocument()
+  })
+  it('keeps the contact anchor for nav', () => {
+    const { container } = render(<HomePage />)
+    expect(container.querySelector('#contact')).toBeInTheDocument()
   })
 })

@@ -13,37 +13,33 @@ export const hobbies: Hobby[] = [
         id: 'lacrosse',
         icon: 'Trophy',
         label: 'Lacrosse',
-        detail:
-          'Played all four years of high school. Pulled my hamstring five times across junior and senior year — five times.',
+        detail: 'Played all four years of high school.',
       },
       {
         id: 'volleyball',
         icon: 'Users',
         label: 'Club Volleyball',
-        detail:
-          'Played club volleyball at Auburn for a year. Served as a reasonable excuse to still pretend to be athletic.',
+        detail: 'Played club volleyball at Auburn for a year.',
       },
       {
         id: 'kayak',
         icon: 'Waves',
         label: 'Kayak & Canoe Instructor',
         detail:
-          'White water kayak and canoe instructor at Camp Rockmont in the Blue Ridge Mountains. Spent summers teaching kids not to flip.',
+          'Whitewater kayak and canoe instructor at Camp Rockmont in the Blue Ridge Mountains.',
       },
       {
         id: 'vickery',
         icon: 'TreePine',
         label: 'Vickery Creek',
-        detail:
-          'Favourite park in Atlanta so far. Waterfalls, trails, enough elevation to feel like a real hike.',
+        detail: 'Favorite park in Atlanta so far — waterfalls, trails, and real elevation.',
       },
     ],
   },
   {
     id: 'instruments',
     title: 'Playing Instruments',
-    description:
-      'Started with band in high school and it stuck. Music is the best kind of debugging — patient, iterative, and the feedback loop is immediate.',
+    description: "Started with band in high school and it stuck. I've been playing ever since.",
     accentColor: 'rgba(99, 102, 241, 0.15)',
     photo: '/instruments.JPG',
     details: [
@@ -51,29 +47,25 @@ export const hobbies: Hobby[] = [
         id: 'five',
         icon: 'Music',
         label: '5 Instruments',
-        detail:
-          'Piano, guitar, ukulele, harmonica, and trumpet. Each one feels like a different dialect of the same language.',
+        detail: 'Piano, guitar, ukulele, harmonica, and trumpet.',
       },
       {
         id: 'trumpet',
         icon: 'Mic2',
         label: 'Trumpet Era',
-        detail:
-          'Played trumpet all through high school — marching band, concert band, jazz ensemble. Still the loudest thing I own.',
+        detail: 'Played through high school — marching band, concert band, and jazz ensemble.',
       },
       {
         id: 'guitar',
         icon: 'Guitar',
         label: 'Guitar Deep Dive',
-        detail:
-          "Two years ago I really got into guitar. It's the one that stuck the hardest. The others are catching up.",
+        detail: "Picked it up seriously two years ago. It's the one I play most now.",
       },
       {
         id: 'others',
         icon: 'Sparkles',
         label: 'The Others',
-        detail:
-          'Piano, uke, and harmonica are all in various states of being re-learned. Progress is non-linear.',
+        detail: 'Piano, ukulele, and harmonica rotate in and out of practice.',
       },
     ],
   },
@@ -89,8 +81,7 @@ export const hobbies: Hobby[] = [
         id: 'elo',
         icon: 'BarChart2',
         label: '1400 ELO',
-        detail:
-          "Rapid rating — and I genuinely don't deserve it. My opening book is embarrassing and I play too fast. Working on it.",
+        detail: 'Around 1400 rapid on chess.com.',
       },
       {
         id: 'challenge',
@@ -112,27 +103,25 @@ export const hobbies: Hobby[] = [
         id: 'rl',
         icon: 'Rocket',
         label: 'Rocket League',
-        detail:
-          "Grand Champion. Mechanically the most demanding game I've played — and I can't stop.",
+        detail: "Grand Champion — the most mechanically demanding game I've played.",
       },
       {
         id: 'val',
         icon: 'Crosshair',
         label: 'Valorant',
-        detail: 'Ascendant. Mostly play duelists. My aim is fine; my game sense needs work.',
+        detail: 'Ascendant. Mostly duelists.',
       },
       {
         id: 'ow',
         icon: 'Shield',
         label: 'Overwatch',
-        detail: "Diamond. I main support when the team needs it, DPS when it doesn't.",
+        detail: 'Diamond. Flex between support and DPS.',
       },
       {
         id: 'indie',
         icon: 'Gamepad2',
         label: 'Indie Games',
-        detail:
-          "A Short Hike, Wanderstop, and anything that proves you don't need a $200M budget to make something special.",
+        detail: 'A Short Hike, Wanderstop — small games with big ideas.',
       },
     ],
   },
@@ -148,8 +137,7 @@ export const hobbies: Hobby[] = [
         id: 'stories',
         icon: 'BookOpen',
         label: 'Short Stories & Poems',
-        detail:
-          'Short fiction, poems — whatever fits the feeling. I like writing things that are too specific to be made up.',
+        detail: 'Short fiction and poetry, whatever fits the feeling.',
       },
       {
         id: 'philosophy',

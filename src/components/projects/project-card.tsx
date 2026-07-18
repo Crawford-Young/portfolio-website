@@ -4,7 +4,13 @@ import { GlowCard } from '@/components/effects/glow-card'
 import { ArrowUpRight, Github, ExternalLink, Package } from 'lucide-react'
 import type { Project } from '@/types'
 
-export function ProjectCard({ project }: { project: Project }) {
+export function ProjectCard({
+  project,
+  featured = false,
+}: {
+  project: Project
+  featured?: boolean
+}) {
   return (
     <GlowCard className="h-full">
       <Card className="h-full bg-surface/40 backdrop-blur-md border-border/60 hover:border-border transition-colors group">
@@ -22,7 +28,7 @@ export function ProjectCard({ project }: { project: Project }) {
             </Link>
           </div>
           <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-            {project.description}
+            {featured && project.pitch ? project.pitch : project.description}
           </p>
           <div className="flex flex-wrap gap-1.5">
             {project.tech.map((t) => (

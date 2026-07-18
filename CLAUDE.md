@@ -33,10 +33,24 @@ Personal portfolio site deployed on Vercel. No backend, no database, no auth. St
 
 - **No DB, no auth, no server actions.** This is a display site — keep it that way.
 - **Uses own component library** (`@crawfordyoung/ui`). Never copy-paste components in — update the library and consume the new version.
-- **GitHub API data** fetched via RSC with ISR. Keep revalidation intervals in `src/lib/github.ts`. Do not fetch client-side.
+- **GitHub API data** fetched via RSC with ISR. Keep revalidation intervals in `src/server/queries/github.ts`. Do not fetch client-side.
 - **`motion` is intentional.** Portfolio is a showcase — Framer Motion is justified here. Still wrap all animations in `prefers-reduced-motion` guards.
 - **Lighthouse 100 in all categories** except Performance relaxes to 90+ when motion effects are active (per workspace React Bits rule).
 - **No Storybook.** Components come from `@crawfordyoung/ui` which has its own Storybook. This repo has no stories.
+
+---
+
+## Component Library Consumption
+
+`src/app/globals.css` maps `@crawfordyoung/ui` CSS variables → Tailwind v4 utilities via `@theme inline` — **any new library token needs a mapping line added there after a ui bump.**
+
+The same file also carries three consumer-side patches for gaps in the library, each an upstream-fix candidate — remove the corresponding override once a future `@crawfordyoung/ui` release ships the fix:
+
+| Patch                                                                                     | Why it lives here                                                                                                                                                                     |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Accordion `@keyframes` + `--animate-accordion-*` tokens in a second `@theme inline` block | The library's Accordion keyframes ship in its Tailwind-v3 preset, which this Tailwind-v4 CSS-first setup does not consume                                                             |
+| `prefers-reduced-motion` guard on `[class*='animate-accordion']`                          | Library Accordion applies `data-[state]:animate-accordion-*` unguarded                                                                                                                |
+| `:root:not(.dark) .text-accent { color: rgb(4 120 87) }`                                  | Library light theme keeps `--accent` at emerald-500 (~2.5:1 on white) — fails WCAG AA as text. Buttons are unaffected: light theme pairs `bg-accent` with black `--accent-foreground` |
 
 ---
 

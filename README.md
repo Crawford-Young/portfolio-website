@@ -1,24 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Crawford Young — Portfolio
+
+Marketing site for projects (Cybond, Instrument Tuner, `@crawfordyoung/ui`), with the person as backup. Built with Next.js App Router, deployed on Vercel.
+
+Live at **https://crawfordyoung.dev**.
+
+## Site Structure
+
+- **Home** (`src/app/page.tsx`): Hero (pitch H1 "I build AI products and developer tools.", avatar eyebrow, "Try Cybond" + GitHub CTAs) → three full-width `FlagshipSection`s with alternating screenshot sides (`@crawfordyoung/ui`, Cybond, Instrument Tuner) → "More projects" grid (`ProjectCard`) → "About the builder" bento strip (About / Hobbies teaser / GitHub stats / Contact, `id="contact"` anchor).
+- **Projects page**: flagships first (full-width, pitch copy via `ProjectCard`'s `featured` prop), then the rest in a 2-column grid.
+- **Hobbies page**: per-hobby `Accordion` (single-open, from `@crawfordyoung/ui`) replacing the old expandable cards.
+
+### Project data model
+
+`Project` (`src/types`) has optional flagship fields, populated in `src/data/projects.ts`:
+
+- `flagship: boolean` — shows in the home/projects flagship treatment
+- `pitch: string` — marketing copy for flagship/featured contexts
+- `screenshot: string` — `public/screenshots/` path, 1440×900
+- `ctaLabel: string` — primary CTA text (e.g. "Try it live")
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Run `just check` for the full local gate (lint, types, tests, build, e2e).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+> **Local dev note:** the GitHub stats card renders zeros locally without a `GITHUB_TOKEN` in `.env.local` — it falls back gracefully on the GitHub API's 401. Vercel has the token set, so production/preview deployments show real stats.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font).
 
 ## Error Boundaries
 
@@ -28,15 +42,9 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Deploy
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deployed automatically on push to `main` via [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme). See [Next.js deployment docs](https://nextjs.org/docs/app/building-your-application/deploying) for more.

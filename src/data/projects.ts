@@ -55,16 +55,16 @@ export const projects: Project[] = [
   },
   {
     slug: 'instrument-tuner',
-    title: 'Instrument Tuner',
+    title: "Cy's Music",
     description:
-      'Real-time instrument tuner that detects pitch from microphone input and displays accurate tuning feedback.',
-    tech: ['Python', 'Audio Processing'],
+      'Browser music toolkit — chromatic tuner, note detector, metronome, and Metronome Duel, a head-to-head tempo battle game.',
+    tech: ['Next.js', 'TypeScript', 'Web Audio'],
     url: 'https://music.crawfordyoung.dev',
     repo: 'https://github.com/Crawford-Young/InstrumentTuner',
     flagship: true,
     pitch:
-      'A real-time instrument tuner in the browser. Microphone in, accurate pitch out — open it and play.',
-    ctaLabel: 'Open the tuner',
+      'Tune up, keep time, then settle it in Metronome Duel — a head-to-head tempo battle with health bars and streak multipliers. A full music toolkit, right in the browser.',
+    ctaLabel: 'Open the app',
     screenshot: '/screenshots/tuner.png',
   },
   {

@@ -19,7 +19,7 @@ export function WorkTimelineItem({
       <div className={cn('flex-1', isLast ? 'pb-0' : 'pb-10')}>
         <div className="flex items-start justify-between gap-4 flex-wrap">
           <div>
-            <h3 className="font-bold text-foreground tracking-tight">{item.company}</h3>
+            <h2 className="font-bold text-foreground tracking-tight">{item.company}</h2>
             <p className="text-sm text-muted-foreground">{item.role}</p>
           </div>
           <div className="flex flex-col items-end gap-1 shrink-0">
@@ -73,7 +73,7 @@ export function EducationTimelineItem({
       <div className={cn('flex-1', isLast ? 'pb-0' : 'pb-10')}>
         <div className="flex items-start justify-between gap-4 flex-wrap">
           <div>
-            <h3 className="font-semibold text-foreground tracking-tight">{item.institution}</h3>
+            <h2 className="font-semibold text-foreground tracking-tight">{item.institution}</h2>
             <p className="text-sm text-muted-foreground">{item.degree}</p>
           </div>
           <span className="text-xs text-muted-foreground shrink-0">{item.period}</span>

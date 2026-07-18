@@ -83,6 +83,12 @@
   }
 }
 
+/* Library light theme --accent (emerald-500) is ~2.5:1 on white — fails WCAG AA as text.
+   Darken text-accent only; bg-accent surfaces pass via black --accent-foreground. */
+:root:not(.dark) .text-accent {
+  color: rgb(4 120 87);
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;

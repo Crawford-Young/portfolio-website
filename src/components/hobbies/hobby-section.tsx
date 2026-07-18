@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
-import { HobbyDetailCard } from './hobby-detail-card'
+import { HobbyDetailList } from './hobby-detail-list'
 import type { Hobby } from '@/types'
 
 export function HobbySection({ hobby, reverse = false }: { hobby: Hobby; reverse?: boolean }) {
@@ -57,13 +57,7 @@ export function HobbySection({ hobby, reverse = false }: { hobby: Hobby; reverse
           {hobby.description}
         </p>
 
-        {hobby.details.length > 0 && (
-          <div className="flex flex-wrap gap-2">
-            {hobby.details.map((detail) => (
-              <HobbyDetailCard key={detail.id} detail={detail} accentColor={hobby.accentColor} />
-            ))}
-          </div>
-        )}
+        {hobby.details.length > 0 && <HobbyDetailList details={hobby.details} />}
       </div>
     </section>
   )

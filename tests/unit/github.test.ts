@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { getGitHubProfile, getGitHubStars } from '@/server/queries/github'
 
 const mockFetch = vi.fn()
@@ -8,6 +8,10 @@ describe('getGitHubProfile', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     process.env.GITHUB_TOKEN = 'test-token'
+  })
+
+  afterEach(() => {
+    delete process.env.GITHUB_TOKEN
   })
 
   it('calls the correct URL with an Authorization header', async () => {
@@ -39,12 +43,27 @@ describe('getGitHubProfile', () => {
     const result = await getGitHubProfile()
     expect(result).toEqual({ repos: 0, followers: 0 })
   })
+
+  it('omits the Authorization header when no token is configured', async () => {
+    delete process.env.GITHUB_TOKEN
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ public_repos: 15, followers: 42 }),
+    })
+    await getGitHubProfile()
+    const [, init] = mockFetch.mock.calls[0] as [string, { headers: Record<string, string> }]
+    expect(init.headers).not.toHaveProperty('Authorization')
+  })
 })
 
 describe('getGitHubStars', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     process.env.GITHUB_TOKEN = 'test-token'
+  })
+
+  afterEach(() => {
+    delete process.env.GITHUB_TOKEN
   })
 
   it('calls the correct URL with an Authorization header', async () => {
@@ -97,5 +116,16 @@ describe('getGitHubStars', () => {
     })
     const result = await getGitHubStars()
     expect(result).toEqual({ stars: 0 })
+  })
+
+  it('omits the Authorization header when no token is configured', async () => {
+    delete process.env.GITHUB_TOKEN
+    mockFetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => [],
+    })
+    await getGitHubStars()
+    const [, init] = mockFetch.mock.calls[0] as [string, { headers: Record<string, string> }]
+    expect(init.headers).not.toHaveProperty('Authorization')
   })
 })

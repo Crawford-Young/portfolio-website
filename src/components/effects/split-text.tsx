@@ -20,6 +20,12 @@ export function SplitText({ text, className, delay = 0 }: SplitTextProps) {
     )
 
   const words = text.split(' ')
+  let running = 0
+  const offsets = words.map((w) => {
+    const o = running
+    running += w.length
+    return o
+  })
 
   return (
     <span className={className} aria-label={text}>
@@ -37,7 +43,7 @@ export function SplitText({ text, className, delay = 0 }: SplitTextProps) {
               animate={{ y: 0, opacity: 1 }}
               transition={{
                 duration: 0.55,
-                delay: delay + (wi * word.length + ci) * 0.028,
+                delay: delay + (offsets[wi] + ci) * 0.028,
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
@@ -49,7 +55,7 @@ export function SplitText({ text, className, delay = 0 }: SplitTextProps) {
               className="inline-block"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0, delay: delay + (wi + 1) * 0.1 }}
+              transition={{ duration: 0, delay: delay + (offsets[wi] + word.length) * 0.028 }}
             >
               &nbsp;
             </motion.span>

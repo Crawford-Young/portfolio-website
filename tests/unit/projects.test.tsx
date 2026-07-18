@@ -24,7 +24,7 @@ describe('ProjectsPage', () => {
     render(<ProjectsPage />)
     expect(
       screen.getByText(
-        'An AI scheduling advisor that connects to your Google Calendar, understands how you actually spend your time, and helps you plan your week with intention.'
+        "An AI scheduling advisor that connects to your Google Calendar, understands how you actually spend your time, and helps you plan your week with intention — plus the social layer competitors don't have: streaks, public profiles, and schedule sharing with per-event privacy."
       )
     ).toBeInTheDocument()
   })

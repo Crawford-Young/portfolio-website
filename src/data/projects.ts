@@ -29,12 +29,12 @@ export const projects: Project[] = [
     slug: 'cybond',
     title: 'Cybond',
     description:
-      'AI-powered scheduling advisor that integrates with Google Calendar, analyzes your schedule, and surfaces recommendations to help you plan your week more intentionally.',
+      'AI scheduling advisor with a social layer — Google Calendar integration, AI recommendations, streaks, public profiles, and schedule sharing with per-event privacy.',
     tech: ['Next.js', 'TypeScript', 'AI SDK', 'Neon', 'Drizzle', 'Auth.js', 'Stripe'],
     url: 'https://cybond.crawfordyoung.dev',
     flagship: true,
     pitch:
-      'An AI scheduling advisor that connects to your Google Calendar, understands how you actually spend your time, and helps you plan your week with intention.',
+      "An AI scheduling advisor that connects to your Google Calendar, understands how you actually spend your time, and helps you plan your week with intention — plus the social layer competitors don't have: streaks, public profiles, and schedule sharing with per-event privacy.",
     ctaLabel: 'Try it live',
     screenshot: '/screenshots/cybond.png',
   },

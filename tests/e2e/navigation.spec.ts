@@ -55,9 +55,15 @@ test('instrument tuner card shows live link', async ({ page }) => {
 
 test('nav links navigate correctly', async ({ page }) => {
   await page.goto('/')
-  await page.getByRole('link', { name: /projects/i }).click()
+  await page
+    .getByRole('navigation')
+    .getByRole('link', { name: /projects/i })
+    .click()
   await expect(page).toHaveURL('/projects')
-  await page.getByRole('link', { name: /experience/i }).click()
+  await page
+    .getByRole('navigation')
+    .getByRole('link', { name: /experience/i })
+    .click()
   await expect(page).toHaveURL('/experience')
 })
 

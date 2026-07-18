@@ -76,6 +76,13 @@
   }
 }
 
+/* Library Accordion applies data-[state]:animate-accordion-* unguarded; honor reduced motion here */
+@media (prefers-reduced-motion: reduce) {
+  [class*='animate-accordion'] {
+    animation: none !important;
+  }
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 80px;

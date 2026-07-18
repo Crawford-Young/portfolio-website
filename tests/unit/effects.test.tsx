@@ -56,4 +56,16 @@ describe('SplitText', () => {
     // aria-label provides the full text for screen readers
     expect(screen.getByLabelText('Hello World')).toBeInTheDocument()
   })
+
+  it('reserves descender space in word wrappers so g/y are not clipped', () => {
+    const { container } = render(<SplitText text="Crawford Young" />)
+    const wrappers = Array.from(container.querySelectorAll('span')).filter(
+      (s) => s.style.overflow === 'hidden'
+    )
+    expect(wrappers.length).toBeGreaterThan(0)
+    for (const w of wrappers) {
+      expect(w.style.paddingBottom).toBe('0.15em')
+      expect(w.style.marginBottom).toBe('-0.15em')
+    }
+  })
 })

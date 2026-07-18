@@ -24,7 +24,11 @@ export function SplitText({ text, className, delay = 0 }: SplitTextProps) {
   return (
     <span className={className} aria-label={text}>
       {words.map((word, wi) => (
-        <span key={wi} className="inline-block" style={{ overflow: 'hidden' }}>
+        <span
+          key={wi}
+          className="inline-block"
+          style={{ overflow: 'hidden', paddingBottom: '0.15em', marginBottom: '-0.15em' }}
+        >
           {word.split('').map((char, ci) => (
             <motion.span
               key={ci}

@@ -53,7 +53,7 @@ export const hobbies: Hobby[] = [
         id: 'trumpet',
         icon: 'Mic2',
         label: 'Trumpet Era',
-        detail: 'Played through high school — marching band, concert band, and jazz ensemble.',
+        detail: 'Played through high school — symphonic band.',
       },
       {
         id: 'guitar',
@@ -103,19 +103,19 @@ export const hobbies: Hobby[] = [
         id: 'rl',
         icon: 'Rocket',
         label: 'Rocket League',
-        detail: "Grand Champion — the most mechanically demanding game I've played.",
+        detail: 'Grand Champion — got there on game sense, not mechanics.',
       },
       {
         id: 'val',
         icon: 'Crosshair',
         label: 'Valorant',
-        detail: 'Ascendant. Mostly duelists.',
+        detail: 'Ascendant. Fill player, mostly sentinel.',
       },
       {
         id: 'ow',
         icon: 'Shield',
         label: 'Overwatch',
-        detail: 'Diamond. Flex between support and DPS.',
+        detail: 'Diamond. I play everything, but Cass is my favorite.',
       },
       {
         id: 'indie',

@@ -1,11 +1,11 @@
 const GITHUB_USER = 'Crawford-Young'
 const BASE_URL = 'https://api.github.com'
 
-function authHeaders() {
-  return {
-    Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-    Accept: 'application/vnd.github+json',
-  }
+function authHeaders(): HeadersInit {
+  const token = process.env.GITHUB_TOKEN
+  return token
+    ? { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json' }
+    : { Accept: 'application/vnd.github+json' }
 }
 
 export async function getGitHubProfile(): Promise<{ repos: number; followers: number }> {

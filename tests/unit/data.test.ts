@@ -67,10 +67,11 @@ describe('hobbies', () => {
       'Whitewater kayak and canoe instructor at Camp Rockmont in the Blue Ridge Mountains.'
     )
     expect(detail('instruments', 'five')).toBe('Piano, guitar, ukulele, harmonica, and trumpet.')
+    expect(detail('instruments', 'trumpet')).toBe('Played through high school — symphonic band.')
     expect(detail('chess', 'elo')).toBe('Around 1400 rapid on chess.com.')
-    expect(detail('gaming', 'rl')).toBe(
-      "Grand Champion — the most mechanically demanding game I've played."
-    )
+    expect(detail('gaming', 'rl')).toBe('Grand Champion — got there on game sense, not mechanics.')
+    expect(detail('gaming', 'val')).toBe('Ascendant. Fill player, mostly sentinel.')
+    expect(detail('gaming', 'ow')).toBe('Diamond. I play everything, but Cass is my favorite.')
     expect(detail('writing', 'stories')).toBe(
       'Short fiction and poetry, whatever fits the feeling.'
     )

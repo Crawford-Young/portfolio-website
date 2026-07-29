@@ -37,7 +37,10 @@ export function PillNav() {
     <>
       {/* Desktop */}
       <header className="fixed top-4 inset-x-0 z-50 hidden md:flex justify-center pointer-events-none">
-        <nav className="pointer-events-auto flex items-center gap-0.5 rounded-full bg-surface/80 backdrop-blur-md border border-border px-2 py-1.5 shadow-lg shadow-black/20">
+        <nav
+          aria-label="Main"
+          className="pointer-events-auto flex items-center gap-0.5 rounded-full bg-surface/80 backdrop-blur-md border border-border px-2 py-1.5 shadow-lg shadow-black/20"
+        >
           {NAV_LINKS.map(({ href, label }) => (
             <Link
               key={href}

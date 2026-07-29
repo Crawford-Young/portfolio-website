@@ -4,13 +4,27 @@ import { Github, Linkedin, Mail } from 'lucide-react'
 export function Footer() {
   return (
     <footer className="mt-24 border-t border-border py-8">
-      <div className="mx-auto max-w-5xl px-6 flex items-center justify-between">
+      <div className="mx-auto max-w-5xl px-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <span className="text-sm text-muted-foreground">
           © {new Date().getFullYear()} Crawford Young
         </span>
+        <nav aria-label="Legal" className="flex items-center gap-4">
+          <Link
+            href="/contact"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Contact
+          </Link>
+          <Link
+            href="/privacy"
+            className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+          >
+            Privacy
+          </Link>
+        </nav>
         <div className="flex items-center gap-4">
           <Link
-            href="mailto:crawfordyoung248@gmail.com"
+            href="mailto:hello@crawfordyoung.dev"
             aria-label="Email"
             className="text-muted-foreground hover:text-foreground transition-colors"
           >

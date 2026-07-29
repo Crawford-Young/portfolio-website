@@ -6,13 +6,14 @@ import { PillNav } from '@/components/layout/nav'
 import { Footer } from '@/components/layout/footer'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { SITE_URL } from '@/lib/site-routes'
 import './globals.css'
 
 export const metadata: Metadata = {
   title: { default: 'Crawford Young', template: '%s | Crawford Young' },
   description:
     'AI products and developer tools by Crawford Young — Cybond, @crawfordyoung/ui, and more. Shipped, tested, and live.',
-  metadataBase: new URL('https://crawford-young.vercel.app'),
+  metadataBase: new URL(SITE_URL),
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

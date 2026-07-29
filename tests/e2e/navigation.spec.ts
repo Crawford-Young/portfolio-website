@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test'
 test('home page loads with hero', async ({ page }) => {
   await page.goto('/')
   await expect(page).toHaveTitle(/Crawford Young/)
-  await expect(page.getByRole('navigation')).toBeVisible()
+  await expect(page.getByRole('navigation', { name: 'Main' })).toBeVisible()
 })
 
 test('projects page lists all projects', async ({ page }) => {
@@ -56,12 +56,12 @@ test("cy's music card shows live link", async ({ page }) => {
 test('nav links navigate correctly', async ({ page }) => {
   await page.goto('/')
   await page
-    .getByRole('navigation')
+    .getByRole('navigation', { name: 'Main' })
     .getByRole('link', { name: /projects/i })
     .click()
   await expect(page).toHaveURL('/projects')
   await page
-    .getByRole('navigation')
+    .getByRole('navigation', { name: 'Main' })
     .getByRole('link', { name: /experience/i })
     .click()
   await expect(page).toHaveURL('/experience')

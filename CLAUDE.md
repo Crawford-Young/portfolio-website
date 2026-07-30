@@ -74,6 +74,13 @@ All other workspace DoD items remain required.
 - `src/app/**` is excluded from the vitest coverage `include` allowlist — `tests/unit/root-error.test.tsx` and `tests/unit/global-error.test.tsx` are behavioral, not coverage-feeding.
 - **Known tooling gap:** `postcss.config.mjs` uses the Next.js/Tailwind-v4 string-plugin form (`plugins: ['@tailwindcss/postcss']`), which Vite's own postcss loader (used by vitest) cannot resolve — any test that transitively imports a `.css` file fails with `Invalid PostCSS Plugin found`. `global-error.tsx` imports `@/app/globals.css` so design tokens resolve outside the app shell; its test mocks that import (`vi.mock('@/app/globals.css', () => ({}))`) to route around the gap. A real fix (postcss config format vitest can also load, or a vitest CSS alias) is unscoped housekeeping — not fixed here.
 
+## Crawlability & AdSense (adsense-w1)
+
+- **`src/lib/site-routes.ts` is the single source for `SITE_URL` and the sitemap route list.** `src/app/robots.ts` and `src/app/sitemap.ts` are thin wrappers over it, and `metadataBase` in the root layout is pinned to the same constant — **never to an env var.** A canonical origin is a published fact about this host; an env-derived one is correct locally and can be wrong in the deployed artifact, where no local gate reaches it (a sibling repo shipped a production `og:url` of `http://localhost:3000` this way). New pages get added to the route list, not hand-written into the sitemap.
+- **No ad units ship in this repo.** `src/app/layout.tsx` carries the AdSense verification loader only; unit placement is a post-approval decision, and a unit on a page without substantive prose is the policy violation AdSense names explicitly.
+- **`tests/e2e/compliance.spec.ts` runs against a configurable base URL** — `PORT` for local, `E2E_BASE_URL` for production. It asserts `ads.txt` (200, `text/plain`, publisher line byte-exact), `robots.txt` (200, carries `Sitemap:`), `sitemap.xml` (200, lists `/privacy`), the `/privacy` heading, `og:url === SITE_URL`, and a real 404 on an unknown path. **The `just check` e2e recipe passes no `PORT`**, and `reuseExistingServer: !CI` will silently drive whatever dev server already holds the port — run the e2e segment as `PORT=<own port> pnpm exec playwright test` whenever another session is live.
+- **No Sentry debug routes.** `/sentry-example-page` and its API route were removed — crawlable, contentless, and deliberately error-throwing. Don't reintroduce them; test Sentry from a scratch branch.
+
 ## Deployment
 
 - Deployed automatically on push to `main` via Vercel

@@ -9,8 +9,23 @@ Live at **https://crawfordyoung.dev**.
 - **Home** (`src/app/page.tsx`): Hero (pitch H1 "I build AI products and developer tools.", avatar eyebrow, "Try Cybond" + GitHub CTAs) → three full-width `FlagshipSection`s with alternating screenshot sides (`@crawfordyoung/ui`, Cybond, Cy's Music) → "More projects" grid (`ProjectCard`) → "About the builder" bento strip (About / Hobbies teaser / GitHub stats / Contact, `id="contact"` anchor).
 - **Projects page**: flagships first (full-width, pitch copy via `ProjectCard`'s `featured` prop), then the rest in a 2-column grid.
 - **Hobbies page**: per-hobby `Accordion` (single-open, from `@crawfordyoung/ui`) replacing the old expandable cards.
+- **Writing hub** (`src/app/writing/`): `/writing` lists three poem collections and one short story; each piece lives at `/writing/<slug>` with per-poem anchor links. Content is MDX — see [Writing & content pipeline](#writing--content-pipeline).
+- **About page** (`src/app/about/`): ~400-word first-person bio rendered from `src/content/about.mdx`, linked last in the nav.
+- **Project detail pages** (`src/app/projects/[slug]/`): each project carries a 300–600-word MDX write-up (problem → approach → what I'd do differently → what broke) rendered below the CTA row.
 - **Privacy page** (`src/app/privacy/page.tsx`) and **Contact page** (`src/app/contact/page.tsx`): the two AdSense-required legal/contact surfaces, linked from the footer. Contact publishes `hello@crawfordyoung.dev`.
 - **Crawlability surfaces**: `src/app/robots.ts` and `src/app/sitemap.ts` are thin wrappers over `src/lib/site-routes.ts` (which owns `SITE_URL` and the route list — logic lives in `src/lib/` because `src/app/**` is outside the vitest coverage allowlist). `public/ads.txt` carries the AdSense publisher line. `tests/e2e/compliance.spec.ts` asserts the whole contract — `ads.txt`, `robots.txt`, `sitemap.xml`, the legal page, a real 404 on an unknown path — against a configurable base URL (`PORT` / `E2E_BASE_URL`), so the same spec runs against dev in the gate and against production after deploy. The Sentry debug routes were removed: they were crawlable, contentless, and deliberately error-throwing.
+
+### Writing & content pipeline
+
+All long-form prose is MDX compiled by `@next/mdx`. The moving parts:
+
+- **Registry** — `src/data/writing.ts` (zod-validated): collections, poems (with anchor slugs), and the story. The hub, collection pages, sitemap, and content tests all derive from it.
+- **Content** — `src/content/writing/<slug>.mdx` (collections + story), `src/content/projects/<slug>.mdx` (project write-ups), `src/content/about.mdx`.
+- **Content maps** — `src/app/writing/content-map.ts` and `src/app/projects/[slug]/content-map.ts` hold explicit static `import()` entries per slug (Turbopack cannot follow template-literal dynamic imports).
+
+**Adding a piece** = registry entry + `.mdx` file + content-map line. The unit tests in `tests/unit/writing-content.test.ts` are registry-driven: they compile each raw MDX source via `@mdx-js/mdx` and enforce word-count floors (collections 400, story 800, project write-ups 300, about 350), plus an orphan-file check — a forgotten registry entry or stray `.mdx` fails the suite.
+
+`src/content/` is prettier-ignored: poem line breaks are content, and prettier's MDX parser is experimental.
 
 ### Project data model
 

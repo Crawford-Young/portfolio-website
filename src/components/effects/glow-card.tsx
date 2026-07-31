@@ -33,7 +33,7 @@ export function GlowCard({ children, className }: GlowCardProps) {
       ref={ref}
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
-      className={cn('relative group', className)}
+      className={cn('relative group rounded-xl', className)}
       style={{ '--gx': '50%', '--gy': '50%' } as React.CSSProperties}
     >
       {!reduced && (

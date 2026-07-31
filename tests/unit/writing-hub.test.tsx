@@ -35,10 +35,10 @@ describe('WritingPage', () => {
     )
   })
 
-  it('renders an outbound link to the Substack', () => {
+  it('renders an outbound link to the Substack page itself, not the subscribe form', () => {
     render(<WritingPage />)
-    const substackLink = screen.getByRole('link', { name: 'Subscribe on Substack' })
-    expect(substackLink).toHaveAttribute('href', 'https://crawfordyoung.substack.com/subscribe')
+    const substackLink = screen.getByRole('link', { name: 'Read on Substack' })
+    expect(substackLink).toHaveAttribute('href', 'https://crawfordyoung.substack.com/')
     expect(substackLink).toHaveAttribute('target', '_blank')
     expect(substackLink).toHaveAttribute('rel', 'noreferrer')
   })

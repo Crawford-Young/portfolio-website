@@ -9,4 +9,12 @@ describe('Poem', () => {
     expect(el?.textContent).toBe('one\ntwo')
     expect(el?.className).toContain('whitespace-pre-line')
   })
+
+  it('renders as a card panel', () => {
+    const { container } = render(<Poem>{'one\ntwo'}</Poem>)
+    const el = container.firstElementChild
+    expect(el?.className).toContain('rounded-xl')
+    expect(el?.className).toContain('border')
+    expect(el?.className).toContain('bg-surface/40')
+  })
 })

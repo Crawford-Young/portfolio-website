@@ -6,12 +6,14 @@ import { PillNav } from '@/components/layout/nav'
 vi.mock('next/navigation', () => ({ usePathname: () => '/' }))
 
 describe('PillNav', () => {
-  it('renders the 4 nav links with correct hrefs', () => {
+  it('renders the 5 nav links with correct hrefs', () => {
     render(<PillNav />)
     const homeLinks = screen.getAllByRole('link', { name: 'Home' })
     expect(homeLinks[0]).toHaveAttribute('href', '/')
     const projectsLinks = screen.getAllByRole('link', { name: 'Projects' })
     expect(projectsLinks[0]).toHaveAttribute('href', '/projects')
+    const writingLinks = screen.getAllByRole('link', { name: 'Writing' })
+    expect(writingLinks[0]).toHaveAttribute('href', '/writing')
     const hobbiesLinks = screen.getAllByRole('link', { name: 'Hobbies' })
     expect(hobbiesLinks[0]).toHaveAttribute('href', '/hobbies')
     const experienceLinks = screen.getAllByRole('link', { name: 'Experience' })

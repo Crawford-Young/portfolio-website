@@ -6,7 +6,7 @@ import { Spotlight } from '@/components/effects/spotlight'
 import { GlowCard } from '@/components/effects/glow-card'
 import { collections, STORY, writingPath } from '@/data/writing'
 
-const SUBSTACK_URL = 'https://crawfordyoung.substack.com/subscribe'
+const SUBSTACK_URL = 'https://crawfordyoung.substack.com/'
 const SINGLE_POEM_COUNT = 1
 
 export const metadata: Metadata = {
@@ -98,14 +98,15 @@ export default function WritingPage(): React.JSX.Element {
                   href={SUBSTACK_URL}
                   target="_blank"
                   rel="noreferrer"
-                  aria-label="Read on Substack"
+                  aria-label="Open Substack"
                   className="shrink-0"
                 >
                   <ExternalLink className="h-4 w-4 text-muted-foreground group-hover:text-accent transition-colors" />
                 </a>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed flex-1">
-                Subscribe on Substack for new poems and stories as they&apos;re written.
+                New poems and stories land on Substack as they&apos;re written — read everything
+                there.
               </p>
               <a
                 href={SUBSTACK_URL}
@@ -113,7 +114,7 @@ export default function WritingPage(): React.JSX.Element {
                 rel="noreferrer"
                 className="text-xs text-muted-foreground hover:text-foreground transition-colors"
               >
-                Subscribe on Substack
+                Read on Substack
               </a>
             </CardContent>
           </Card>

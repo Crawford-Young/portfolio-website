@@ -16,6 +16,7 @@ describe('site-routes', () => {
         '/experience',
         '/hobbies',
         '/writing',
+        '/about',
         '/privacy',
         '/contact',
       ])

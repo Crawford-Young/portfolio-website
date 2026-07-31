@@ -12,6 +12,7 @@ const NAV_LINKS = [
   { href: '/writing', label: 'Writing' },
   { href: '/hobbies', label: 'Hobbies' },
   { href: '/experience', label: 'Experience' },
+  { href: '/about', label: 'About' },
 ]
 
 export function PillNav() {

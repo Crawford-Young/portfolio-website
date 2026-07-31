@@ -5,9 +5,11 @@ import { describe, it, expect } from 'vitest'
 import { projects } from '@/data/projects'
 import { collections, STORY, writingSlugs } from '@/data/writing'
 import {
+  ABOUT_MIN_WORDS,
   COLLECTION_MIN_WORDS,
   countWords,
   PROJECT_MIN_WORDS,
+  readAboutSource,
   readContentSource,
   STORY_MIN_WORDS,
 } from '@/lib/writing-content'
@@ -76,6 +78,14 @@ describe('writing content files', () => {
     for (const file of files) {
       expect(slugs.has(file.replace(/\.mdx$/, '')), file).toBe(true)
     }
+  })
+})
+
+describe('about page content', () => {
+  it('compiles as MDX and meets the word floor', async () => {
+    const source = readAboutSource()
+    await expect(compile(source)).resolves.toBeDefined()
+    expect(countWords(source)).toBeGreaterThanOrEqual(ABOUT_MIN_WORDS)
   })
 })
 

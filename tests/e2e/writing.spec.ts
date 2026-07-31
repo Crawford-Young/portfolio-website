@@ -46,3 +46,16 @@ test('nav reaches writing', async ({ page }) => {
     .click()
   await expect(page).toHaveURL('/writing')
 })
+
+test('about page is served with its canonical url', async ({ page }) => {
+  await page.goto('/about')
+  await expect(page.getByRole('heading', { name: 'About', level: 1 })).toBeVisible()
+  const canonical = await page.locator('link[rel="canonical"]').getAttribute('href')
+  expect(canonical).toBe(`${SITE_URL}/about`)
+})
+
+test('nav reaches about', async ({ page }) => {
+  await page.goto('/')
+  await page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'About' }).click()
+  await expect(page).toHaveURL('/about')
+})

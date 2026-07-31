@@ -4,11 +4,16 @@ import { join } from 'node:path'
 export const COLLECTION_MIN_WORDS = 400
 export const STORY_MIN_WORDS = 800
 export const PROJECT_MIN_WORDS = 300
+export const ABOUT_MIN_WORDS = 350
 
 const CONTENT_DIR = join(process.cwd(), 'src', 'content')
 
 export function readContentSource(dir: 'writing' | 'projects', slug: string): string {
   return readFileSync(join(CONTENT_DIR, dir, `${slug}.mdx`), 'utf8')
+}
+
+export function readAboutSource(): string {
+  return readFileSync(join(CONTENT_DIR, 'about.mdx'), 'utf8')
 }
 
 // Ported from instrumenttuner src/lib/guide-content.ts (adsense-w2), with `{}` added to the

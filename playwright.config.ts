@@ -10,7 +10,11 @@ export default defineConfig({
   testDir: './tests/e2e',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
+  // Local retry absorbs the Turbopack dev-server race on concurrent MDX first-compiles
+  // (random project/writing route 500s "Unexpected end of JSON input"; prod prerenders all
+  // routes fine — same class as instrumenttuner's guide pages). A retried test runs alone,
+  // which is the condition under which the compile succeeds; failing the retry is real.
+  retries: process.env.CI ? 2 : 1,
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {

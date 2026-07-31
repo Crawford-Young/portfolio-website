@@ -10,6 +10,7 @@ export const STATIC_ROUTES: readonly string[] = [
   '/experience',
   '/hobbies',
   '/writing',
+  '/about',
   '/privacy',
   '/contact',
 ]

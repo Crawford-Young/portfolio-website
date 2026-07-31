@@ -83,6 +83,15 @@ All other workspace DoD items remain required.
 - **`tests/e2e/compliance.spec.ts` runs against a configurable base URL** — `PORT` for local, `E2E_BASE_URL` for production. Nine tests: `ads.txt` (200, `text/plain`, publisher line byte-exact), `robots.txt` (200, carries `Sitemap:`), `sitemap.xml` (200, lists `/privacy`), the `/privacy` and `/contact` headings, `og:url === SITE_URL`, the verification meta tag asserted against the RAW response body (a rendered-DOM check would pass on the loader alone), the debug routes 404ing, and a real 404 on an unknown path. **The `just check` e2e recipe passes no `PORT`**, and `reuseExistingServer: !CI` will silently drive whatever dev server already holds the port — run the e2e segment as `PORT=<own port> pnpm exec playwright test` whenever another session is live.
 - **No Sentry debug routes.** `/sentry-example-page` and its API route were removed — crawlable, contentless, and deliberately error-throwing. Don't reintroduce them; test Sentry from a scratch branch.
 
+## Writing & MDX Conventions (adsense-w3)
+
+- **Add-a-piece triple:** every piece of prose is (1) a registry entry in `src/data/writing.ts` (zod-validated; poems carry anchor slugs), (2) an `.mdx` file under `src/content/` (`writing/<slug>.mdx`, `projects/<slug>.mdx`, or `about.mdx`), and (3) an explicit `import()` line in the matching content map (`src/app/writing/content-map.ts` or `src/app/projects/[slug]/content-map.ts` — named export `projectContent`). Explicit imports are load-bearing: Turbopack cannot follow template-literal dynamic imports. Miss the registry or leave a stray file and the orphan-file check in `tests/unit/writing-content.test.ts` fails.
+- **Word-count floors** live in `src/lib/writing-content.ts`: `COLLECTION_MIN_WORDS=400`, `STORY_MIN_WORDS=800`, `PROJECT_MIN_WORDS=300`, `ABOUT_MIN_WORDS=350`. They exist for AdSense's substantive-content bar — don't lower them to make a thin piece pass; write more.
+- **No MDX in vitest.** The unit tests compile RAW `.mdx` source via `@mdx-js/mdx`'s `compile()` — they never import an `.mdx` module, because vitest has no MDX plugin and an import would fail on syntax, not content. Rendering is e2e's job (`tests/e2e/writing.spec.ts`).
+- **`src/content/` is prettier-ignored** (see `.prettierignore`): poem line/stanza breaks are content, and prettier's MDX parser is experimental — a format pass would rewrite meaning.
+- **Per-page canonical unit:** every content page exports `alternates.canonical` plus a full `openGraph` block (`url`, `siteName: 'Crawford Young'`, `type: 'article'` for pieces / `'website'` for hubs / `'profile'` for about). `metadataBase` alone emits nothing — the W1 rule above applies per page, not just at the root.
+- **Turbopack dev-server MDX first-compile race:** concurrent first requests to MDX routes can 500 one of them ("Unexpected end of JSON input") — dev-only; prod prerenders all routes. Local playwright `retries: 1` absorbs it (a retried test runs alone); a failure that survives the retry is real. Same class as instrumenttuner's guide pages.
+
 ## Deployment
 
 - Deployed automatically on push to `main` via Vercel

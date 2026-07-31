@@ -1,0 +1,21 @@
+## The problem
+
+How do you make one game teach an entire AI curriculum? That's the trick behind UC Berkeley's Pacman projects, which my AI coursework at Auburn was built on: Pacman looks like a toy, but underneath it's a clean testbed for the core problems of artificial intelligence — finding paths, playing against adversaries, learning from reward, and reasoning under uncertainty. The work was implementing the intelligence, in Python, across four escalating projects.
+
+## The approach
+
+The search project came first: depth-first, breadth-first, uniform-cost, and A* search, driving Pacman through mazes to reach goals efficiently. The interesting part isn't the algorithms — it's designing heuristics and problem representations, like the state you need to track for "eat every corner," where a naive encoding blows up and a careful one makes A* fly.
+
+The multiagent project made the ghosts matter: minimax with alpha-beta pruning, and expectimax for opponents that behave randomly rather than optimally. Writing the evaluation function is where the assignment gets real — the difference between an agent that wins and one that hides in a corner is entirely in how you score a position.
+
+Reinforcement learning came third: value iteration, then Q-learning, where the agent learns a policy purely from playing — no model of the world, just states, actions, and rewards. Watching a Q-learning agent go from random flailing to competent play without ever being told the rules is the moment the field clicks.
+
+The last project, tracking, was probabilistic inference: locating ghosts you can't see from noisy distance readings, using hidden Markov models and particle filters that maintain a belief distribution over where each ghost might be.
+
+## What I'd do differently
+
+Instrument earlier. My debugging default was print statements and squinting at the game board, and for the probabilistic projects that's nearly useless — a particle filter fails as a distribution drifting subtly wrong, not as a visible crash. Small visualizations of the belief state would have paid for themselves in the first hour.
+
+## What broke
+
+My expectimax agent, in an instructive way. Against the optimal-opponent assumption of minimax, my agent played fine; modeling random ghosts, it began taking risks that looked reckless — and scored better. Nothing was broken except my intuition: the "safe" play was only safe against a perfect adversary that didn't exist. Getting the opponent model right matters more than searching deeper, which is a lesson that generalizes well past Pacman.

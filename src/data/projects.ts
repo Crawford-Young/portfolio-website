@@ -51,7 +51,6 @@ export const projects: Project[] = [
     description:
       "AI that analyses player game history and assigns personalised puzzles targeting each player's weaknesses.",
     tech: ['Python', 'AI/ML'],
-    repo: 'https://github.com/Crawford-Young/ChessBot',
   },
   {
     slug: 'instrument-tuner',

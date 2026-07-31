@@ -3,7 +3,9 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { Badge, Button } from '@/lib/ui'
 import { ArrowLeft, Github, ExternalLink, Package } from 'lucide-react'
+import { Prose } from '@/components/writing/prose'
 import { projects } from '@/data/projects'
+import { projectContent } from './content-map'
 
 type Params = { params: Promise<{ slug: string }> }
 
@@ -15,13 +17,28 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { slug } = await params
   const project = projects.find((p) => p.slug === slug)
   if (!project) return { title: 'Not found' }
-  return { title: project.title, description: project.description }
+  return {
+    title: project.title,
+    description: project.description,
+    alternates: { canonical: `/projects/${project.slug}` },
+    openGraph: {
+      title: project.title,
+      description: project.description,
+      url: `/projects/${project.slug}`,
+      siteName: 'Crawford Young',
+      type: 'article',
+    },
+  }
 }
 
 export default async function ProjectDetailPage({ params }: Params) {
   const { slug } = await params
   const project = projects.find((p) => p.slug === slug)
   if (!project) notFound()
+
+  const loader = projectContent[slug]
+  if (!loader) notFound()
+  const { default: Writeup } = await loader()
 
   return (
     <div className="mx-auto max-w-3xl px-6 py-16">
@@ -62,6 +79,11 @@ export default async function ProjectDetailPage({ params }: Params) {
             </a>
           </Button>
         )}
+      </div>
+      <div className="mt-12 border-t border-border pt-10">
+        <Prose>
+          <Writeup />
+        </Prose>
       </div>
     </div>
   )

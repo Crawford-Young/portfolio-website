@@ -1,0 +1,19 @@
+## The problem
+
+There's so much AI help for productivity now, and almost none of it solves the actual hard part: keeping yourself accountable. A model can plan your week in seconds — following through is the thing people quietly fail at, alone. That's why Cybond has a social layer on top of the tracking. Your schedule can be visible to people you choose, and being seen changes what you do.
+
+## The approach
+
+The core model took real iteration to get right. An activity is a metadata-only template — a title, session length bounds, a weekly target — with no schedule of its own. An event series holds a recurrence rule and materializes independent events on a rolling eight-week window; each generated event is an ordinary, fully editable calendar row with no sync back to the rule. Progress is a weekly fit score, completed sessions over target, derived on read.
+
+On top of that sits Cy, the AI assistant. It reads your activities and week, and proposes calendar changes as approval cards — a dashed preview of the event on that day's schedule, with a confirm and a deny. Nothing writes to your calendar without your click, and a deny sends your reason back so Cy revises. The social layer gives every user a public profile with a read-only week view, governed by per-event visibility: public shows details, busy shows only the time block, private never leaves the server.
+
+Google Calendar is opt-in through incremental OAuth — sign-in asks for identity only, and connecting your calendar is a separate consent for exactly two scopes. Stored tokens are encrypted at rest with AES-256-GCM.
+
+## What I'd do differently
+
+Start with the boring data model. The first version had one polymorphic table for everything — tasks, goals, habits — with recurrence groups and tombstone rows to keep deleted occurrences deleted. Every feature paid a tax to that flexibility. The rebuild went the opposite way: plain independent event rows, recurrence as a generator with a high-water mark instead of tombstones, and templates that carry no schedule at all. Fewer concepts, and each one does one thing.
+
+## What broke
+
+All-day events vanished. The event dialog stored them with a null start time, and the calendar filters rows without a start off the grid — so creating an all-day event made it unrecoverable through the UI, with every unit test green, because the tests mocked the calendar and never rendered the consequence. It only surfaced in hands-on QA. All-day events now persist real midnight-to-23:59 instants plus a flag, and the lesson stuck: for interactive UI, mocked tests prove you passed props, not that the feature works.

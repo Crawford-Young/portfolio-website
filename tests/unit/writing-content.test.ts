@@ -2,6 +2,7 @@ import { readdirSync } from 'node:fs'
 import { join } from 'node:path'
 import { compile } from '@mdx-js/mdx'
 import { describe, it, expect } from 'vitest'
+import { projects } from '@/data/projects'
 import { collections, STORY, writingSlugs } from '@/data/writing'
 import {
   COLLECTION_MIN_WORDS,
@@ -72,6 +73,24 @@ describe('writing content files', () => {
   it('no orphan writing files outside the registry', () => {
     const files = readdirSync(join(process.cwd(), 'src', 'content', 'writing'))
     const slugs = new Set(writingSlugs())
+    for (const file of files) {
+      expect(slugs.has(file.replace(/\.mdx$/, '')), file).toBe(true)
+    }
+  })
+})
+
+describe('project write-ups', () => {
+  it('every project has a write-up that compiles and meets the floor', async () => {
+    for (const project of projects) {
+      const source = readContentSource('projects', project.slug)
+      await expect(compile(source), project.slug).resolves.toBeDefined()
+      expect(countWords(source), project.slug).toBeGreaterThanOrEqual(PROJECT_MIN_WORDS)
+    }
+  })
+
+  it('no orphan project write-ups', () => {
+    const files = readdirSync(join(process.cwd(), 'src', 'content', 'projects'))
+    const slugs = new Set(projects.map((p) => p.slug))
     for (const file of files) {
       expect(slugs.has(file.replace(/\.mdx$/, '')), file).toBe(true)
     }

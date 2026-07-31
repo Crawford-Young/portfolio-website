@@ -1,0 +1,17 @@
+## The problem
+
+I needed a home on the web that actually shows what I do — not a résumé PDF with a URL, but a site whose own construction is part of the argument. If I'm going to claim I care about design systems, testing, and polish, the portfolio has to be built the way I build everything else, because it's the one project every visitor definitely sees.
+
+## The approach
+
+The site is Next.js with the App Router, deployed on Vercel, and it consumes my own component library — `@crawfordyoung/ui` — rather than one-off styled markup. That constraint is deliberate: if a page here needs something the library can't do, the library gets improved and republished instead of this repo growing a private fork. The design is dark-mode-first with a small set of signature effects — a spotlight header treatment and glow cards — built on Framer Motion, and every animation sits behind a reduced-motion guard.
+
+Under the hood it's a display site on purpose. No database, no auth, no server actions — the only dynamic data is GitHub stats fetched server-side at build time with incremental revalidation. The gates are the same as my application projects: full test coverage on the logic that's covered, Playwright end-to-end tests, axe accessibility checks in both themes, and Lighthouse held at 100 everywhere except performance, which relaxes to 90+ to pay for the motion work.
+
+## What I'd do differently
+
+Treat metadata as a feature from day one. Canonical URLs, Open Graph tags, and the sitemap arrived as their own dedicated pass long after the pages did, and retrofitting them meant auditing every route instead of adding one line per page as it was born. A page isn't done when it renders — it's done when a crawler and a link preview both understand it.
+
+## What broke
+
+The canonical-origin plumbing, in a way that was invisible locally. Next.js resolves relative metadata URLs against a `metadataBase`, and for a while that base was the only canonical configuration the site had — which emits nothing at all on its own. No canonical link, no `og:url`, on every page, while every local check passed because there was no wrong value to catch, just an absence. The fix pinned the site URL as a hardcoded constant in one module, made robots, sitemap, and metadata all derive from it, and added an end-to-end assertion that the served `og:url` matches. Absence is the failure mode that greps can't find — you have to assert presence.

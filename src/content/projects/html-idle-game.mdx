@@ -1,0 +1,19 @@
+## The problem
+
+I love idle games — the genre where numbers go up while you're away and every upgrade makes the next one come faster. One day I wanted to know: how fast could I make one? Not a polished product, not a portfolio centerpiece — a speedrun. The question was whether the core loop that makes idle games compulsive could be stood up in a single sitting with nothing but a browser.
+
+## The approach
+
+The constraint was absolute minimalism: exactly three files — an HTML page, a script, and a stylesheet. No frameworks, no build step, no package manager, no server. Open the file in a browser and it runs. That's the entire deployment story.
+
+What makes the exercise interesting is that an idle game is mostly pure mechanics. Strip away art and story and what's left is a resource that accumulates on a timer, upgrades that raise the rate, and costs that scale so each purchase is a little harder than the last. That exponential tension — income grows, but prices grow faster — is the entire genre in one loop, and it fits comfortably in vanilla JavaScript: state in plain objects, a ticking update, and DOM updates when numbers change.
+
+Working without a framework was the refreshing part. Every abstraction I normally lean on — components, reactivity, bundling — exists to manage complexity, and a project this size has none to manage. The straight line from an idea to `script.js` to the browser is a feedback loop most modern web work has traded away.
+
+## What I'd do differently
+
+Balance with a spreadsheet, not with vibes. Idle games live or die on their numbers — how fast costs scale against income decides whether the game feels rewarding or stalls into a wall. I tuned mine by playing and nudging constants, which finds obvious problems and misses structural ones. Ten minutes modeling the curves would have shown exactly where progression flattened, before any code changed.
+
+## What broke
+
+The pacing, at the edges. A curve that felt right for the first stretch of play drifted at scale — eventually upgrades outran the cost scaling and the tension went slack. In a game whose only content is its numbers, a balance flaw isn't a detail; it is the game. Which was, in its own way, the perfect lesson for a one-sitting build: the code was the fast part. The design is where the time goes.

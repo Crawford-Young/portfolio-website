@@ -33,6 +33,11 @@ test('sitemap lists the writing routes', async ({ request }) => {
   expect(xml).toContain(`${SITE_URL}/writing/the-hiker`)
 })
 
+test('project pages render the write-up prose', async ({ page }) => {
+  await page.goto('/projects/component-library')
+  await expect(page.getByRole('heading', { level: 2 }).first()).toBeVisible()
+})
+
 test('nav reaches writing', async ({ page }) => {
   await page.goto('/')
   await page

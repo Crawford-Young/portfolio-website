@@ -1,0 +1,19 @@
+## The problem
+
+This started as me wanting a tuner that wasn't on my phone. I play five instruments, and every time I sat down to practice, tuning meant finding my phone, dismissing notifications, and opening an ad-covered app. A browser tab on the machine that's already open felt like the right home for it — and once the tuner worked, the project turned into a spot to keep all my music stuff.
+
+## The approach
+
+The app is a single page with four tabs, all built on the Web Audio API. The tuner does chromatic pitch detection against guitar and ukulele string targets, with a live needle gauge and automatic detection of which string you're playing. The note detector strips that down to a raw readout — closest note and frequency straight from the mic. The metronome covers 40 to 240 BPM with tap tempo, selectable time signatures, and a visual beat indicator.
+
+Then there's Metronome Duel, the part that exists purely because it was fun to build: a local hot-seat game where two players take turns matching or guessing a target tempo. A scoring engine converts tempo accuracy into damage, streaks multiply it, and a health-bar match runs until somebody wins.
+
+The architecture keeps all the signal and game logic — tempo math, duel scoring, click synthesis — in pure, framework-free modules with isolated unit tests, while React hooks own the stateful parts like mic analysis and playback. Alongside the tools, the site now hosts eight written guides on tuning technique, alternate tunings, and rhythm practice — you can read them at [music.crawfordyoung.dev/guides](https://music.crawfordyoung.dev/guides).
+
+## What I'd do differently
+
+Name it for what it became. The repo is still called InstrumentTuner, but the tuner is now one tab of four, plus a guide library. Scope grew honestly — each addition was something my own practice wanted — but the identity lagged behind, and renaming things later costs more than naming them loosely up front.
+
+## What broke
+
+The test suite, in a way that looked like the app. The end-to-end tests would intermittently fail across random guide pages with server errors — a different subset every run. The app was fine: production builds prerendered every route perfectly. The culprit was the dev server racing itself compiling several MDX routes at once on first load. The fix was making the suite retry once — a retried test runs alone, which is exactly the condition where the compile succeeds — plus a rule I've kept since: before debugging "broken pages," check whether the pages are broken or the harness is.

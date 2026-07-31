@@ -1,0 +1,17 @@
+## The problem
+
+Every project I started was rebuilding the same buttons, dialogs, and form fields — and every rebuild drifted a little. Different focus rings, different dark-mode handling, different accessibility gaps. I wanted one place where a component gets designed once, tested completely, and then consumed everywhere, so the design conversation happens a single time instead of once per repo.
+
+## The approach
+
+The library is built on Radix UI primitives with Tailwind and CVA for variants, published to npm as `@crawfordyoung/ui`. Radix handles the hard accessibility work — focus trapping, keyboard navigation, ARIA wiring — and I own everything visual on top of it. The design is dark-mode-first: every component is styled and reviewed in dark mode before light mode gets a pass, because dark is the default experience on my sites and designing light-first always left dark looking like an afterthought.
+
+Discipline is the actual product here. Every component ships with 100% test coverage, a Storybook story, and an axe accessibility pass before it merges. Storybook is the dev environment — I design in it, not in a consuming app. Releases go through Changesets so version bumps are deliberate, and the build outputs ESM, CJS, and type declarations so any consumer setup works.
+
+## What I'd do differently
+
+I'd design the extension model first. For a long stretch, whenever an app needed something extra on a component — a streak badge on a card, a lock icon on a calendar chip — I added a typed prop for it. Six waves of calendar work went into props encoding app concerns while a perfectly good render slot sat unused. The library now has a firm rule sorting every component into a class: primitives extend through `asChild` and className, composed shells expose named slots, and stateful interiors expose headless hooks with render-prop context. Apps own their domain; the library owns behavior. Getting there meant deleting shipped API, which is the expensive way to learn it.
+
+## What broke
+
+Time handling. Calendar components originally read hours off ISO strings directly, which silently reports UTC digits instead of the viewer's wall-clock time. Three separate features had independently grown the same bug — chip labels, time inputs, and overnight event splitting all showed the wrong hours for anyone not in UTC. The fix became a library-wide invariant: displayed times always come from local date getters on a parsed instant, never from slicing the string. One bug, three homes, one rule.

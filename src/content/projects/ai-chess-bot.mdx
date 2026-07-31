@@ -1,0 +1,17 @@
+## The problem
+
+Chess puzzle sites hand everyone the same puzzles, roughly sorted by difficulty. But the mistakes I make aren't the mistakes you make — one player hangs pieces in the endgame, another collapses in sharp tactical middlegames. Generic puzzles train the average player, and nobody is the average player. For our COMP 6600 term project at Auburn — a group effort with Cooper Niebuhr and Kaden Range — we asked whether a system could read your actual game history and serve puzzles aimed at your specific weaknesses.
+
+## The approach
+
+The system is a Python pipeline that starts from raw game records in PGN format, the standard notation chess games are stored in. A parser walks each game move by move, an evaluation stage scores the positions to find the moments where a player's move made things measurably worse, and a categorizer labels what kind of mistake each one was. The key signal is the delta — the swing in evaluation before and after a move. A small delta is an inaccuracy; a large one is a blunder worth training against.
+
+From there, the mistakes become a profile: which categories of error show up most in your games. Puzzle selection targets those categories, so a player who keeps missing tactics gets tactical puzzles, and a player whose endgames leak points drills endgames. On the model side we trained a ResNet — a convolutional network architecture that has proven to work well on chess positions encoded as board planes — and the whole thing was written up as a proper paper in LaTeX, since the course treated the project as research, not just a build.
+
+## What I'd do differently
+
+Spend more of the budget on the data than the model. Like most student ML projects, the exciting part was the network, so that's where the time went — but the ceiling on the whole system was set by how well the categorizer labeled mistakes, and that stage got the least iteration. A sharper taxonomy of mistake types, validated against how coaches actually describe errors, would have improved the end product more than any architecture change.
+
+## What broke
+
+The pipeline's assumptions about real-world data. PGN files in the wild are messier than the spec suggests — annotations, variations, malformed headers, abandoned games. Early runs died mid-batch on files that looked fine at a glance, and the fix was the unglamorous kind: making the parser defensive, logging and skipping what it couldn't handle, and treating clean data as an output of the system rather than an input you get to assume.

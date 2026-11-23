@@ -1,0 +1,22 @@
+# Firebase App Hosting (Cloud Run underneath). Prep for the GCP move: Vercel
+# keeps deploying until the cutover, and nothing here affects it.
+# Schema: https://firebase.google.com/docs/app-hosting/configure
+
+runConfig:
+  # Scale to zero between visits; a cold start costs one slow first request.
+  minInstances: 0
+  maxInstances: 4
+  concurrency: 80
+  cpu: 1
+  memoryMiB: 512
+
+env:
+  # Zero-scope PAT for the ISR GitHub fetches (src/server/queries/github.ts).
+  # Create it with: firebase apphosting:secrets:set github-token
+  - variable: GITHUB_TOKEN
+    secret: github-token
+    availability: [BUILD, RUNTIME]
+
+# NEXT_PUBLIC_ADSENSE_CLIENT gates the AdSense loader and must stay unset outside
+# production, so it goes in apphosting.production.yaml (or the production
+# backend's settings) with availability [BUILD, RUNTIME].

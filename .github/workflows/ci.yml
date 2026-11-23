@@ -69,7 +69,10 @@ jobs:
 
   e2e:
     name: E2E Accessibility
-    runs-on: ubuntu-latest
+    # Pinned: ubuntu-latest moved to 26.04, where the locked Playwright (1.60.0)
+    # has no Chromium build ("does not support chromium on ubuntu26.04-x64").
+    # Go back to ubuntu-latest once @playwright/test is bumped past that.
+    runs-on: ubuntu-24.04
     needs: [lint-and-typecheck, test]
     steps:
       - name: Checkout

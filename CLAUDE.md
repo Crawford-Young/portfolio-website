@@ -59,7 +59,7 @@ The same file also carries three consumer-side patches for gaps in the library, 
 Workspace DoD applies with these exceptions:
 
 - Storybook: **skip** — not applicable for a consumer app
-- Sentry: **enabled** — client-side error monitoring, session replay, and tracing via `@sentry/nextjs`
+- Error monitoring: **none for now** — Sentry was dropped ahead of the GCP move; monitoring is chosen with that migration
 - Rate limiting: **skip** — no user-facing endpoints
 - Lighthouse Performance: **90+** (not 100) — `motion` animations affect score
 
@@ -70,7 +70,7 @@ All other workspace DoD items remain required.
 ## Error Boundaries
 
 - Root (`src/app/error.tsx`) and global (`src/app/global-error.tsx`) boundaries render `RouteErrorFallback` (`@crawfordyoung/ui` ≥0.24.0) with `homeHref="/"` — placement rule: root/global boundaries get the home link (no surviving shell nav); segment boundaries would not.
-- Both capture to Sentry via `useEffect(() => Sentry.captureException(error), [error])`.
+- They render the fallback only; nothing captures the error until GCP monitoring lands.
 - `src/app/**` is excluded from the vitest coverage `include` allowlist — `tests/unit/root-error.test.tsx` and `tests/unit/global-error.test.tsx` are behavioral, not coverage-feeding.
 - **Known tooling gap:** `postcss.config.mjs` uses the Next.js/Tailwind-v4 string-plugin form (`plugins: ['@tailwindcss/postcss']`), which Vite's own postcss loader (used by vitest) cannot resolve — any test that transitively imports a `.css` file fails with `Invalid PostCSS Plugin found`. `global-error.tsx` imports `@/app/globals.css` so design tokens resolve outside the app shell; its test mocks that import (`vi.mock('@/app/globals.css', () => ({}))`) to route around the gap. A real fix (postcss config format vitest can also load, or a vitest CSS alias) is unscoped housekeeping — not fixed here.
 
@@ -81,7 +81,7 @@ All other workspace DoD items remain required.
 - **`metadataBase` alone advertises nothing — the `openGraph` block is what does it.** `metadataBase` only resolves RELATIVE URLs inside other metadata fields, so before the `openGraph` block landed this site served no `og:` tags and no canonical link at all, on a pinned `metadataBase`. That absence is invisible to any check hunting a WRONG origin, which is how it survived the whole W1 wave and its production sweep. Do not remove the block as redundant, and keep `url: '/'` relative so the origin has exactly one source. There is deliberately **no `images` key** — this repo ships no OG image and naming one would serve a 404 to every social scraper.
 - **AdSense verification does not rely on JS.** `metadata.other['google-adsense-account']` puts the verification tag in the served HTML. The `adsbygoogle` loader is `strategy="lazyOnload"`, so it appears only after the browser executes JS — fine for ad serving, a bad bet for a verification crawler. The publisher id in `other` is a literal on purpose: binding it to `NEXT_PUBLIC_ADSENSE_CLIENT` would let an unset Vercel var silently delete the snippet, which is exactly what happened to the loader (W1 issue #11).
 - **`tests/e2e/compliance.spec.ts` runs against a configurable base URL** — `PORT` for local, `E2E_BASE_URL` for production. Nine tests: `ads.txt` (200, `text/plain`, publisher line byte-exact), `robots.txt` (200, carries `Sitemap:`), `sitemap.xml` (200, lists `/privacy`), the `/privacy` and `/contact` headings, `og:url === SITE_URL`, the verification meta tag asserted against the RAW response body (a rendered-DOM check would pass on the loader alone), the debug routes 404ing, and a real 404 on an unknown path. **The `just check` e2e recipe passes no `PORT`**, and `reuseExistingServer: !CI` will silently drive whatever dev server already holds the port — run the e2e segment as `PORT=<own port> pnpm exec playwright test` whenever another session is live.
-- **No Sentry debug routes.** `/sentry-example-page` and its API route were removed — crawlable, contentless, and deliberately error-throwing. Don't reintroduce them; test Sentry from a scratch branch.
+- **No Sentry debug routes.** `/sentry-example-page` and its API route were removed — crawlable, contentless, and deliberately error-throwing. Don't reintroduce them. The compliance spec still asserts they 404.
 
 ## Writing & MDX Conventions (adsense-w3)
 
@@ -110,3 +110,7 @@ All other workspace DoD items remain required.
 ## Planning Docs
 
 `~/code/docs/Crawford-Young.github.io/` — specs, plans, and ADRs for this project.
+
+## Hosting (GCP move)
+
+Production is still Vercel. `apphosting.yaml` prepares Firebase App Hosting (Cloud Run underneath): scale-to-zero, `GITHUB_TOKEN` from Secret Manager (runtime only, ISR fetches), `NEXT_PUBLIC_ADSENSE_CLIENT` at build time. `@vercel/analytics` and `@vercel/speed-insights` do nothing off Vercel; drop or replace them at cutover. `engines.node` is `>=22` (App Hosting's floor).

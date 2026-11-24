@@ -54,7 +54,7 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 ## Error Boundaries
 
 - `src/app/error.tsx` (root boundary) and `src/app/global-error.tsx` (global boundary, catches errors in the root layout itself) both render `RouteErrorFallback` from `@crawfordyoung/ui` with `homeHref="/"` — a home link is the only surviving nav at these two levels since the app shell may not have rendered.
-- Both boundaries capture the error to Sentry (`@sentry/nextjs`) via a `useEffect`.
+- The boundaries render the fallback only; error monitoring was dropped ahead of the GCP move.
 - Segment-level boundaries (none currently in this repo) keep the app shell and do not need `homeHref` — the shell nav already gets the user home.
 
 ## Learn More
